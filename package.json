@@ -1,0 +1,8 @@
+{
+  "name": "frontendkit-components",
+  "version": "0.0.1",
+  "main": "index.js",
+  "repository": "git@github.com:crowdlift/frontendkit-components.git",
+  "author": "Joe Johnston <joe@simple10.com>",
+  "license": "UNLICENSED"
+}
