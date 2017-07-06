@@ -1,0 +1,36 @@
+extends ../layouts/default.pug
+
+block head
+  link(rel='dns-prefetch', href='http://fonts.googleapis.com/')
+
+block body
+  section.fw-section.padding-top-3x.padding-bottom-3x
+    .container
+      .row.text-center
+        .col-md-12
+          h1 Ooops! Page not found.
+          h2
+            a(href='/') Return to home page
+
+      .padding-top.visible-sm.visible-xs
+
+
+  section.fw-section.padding-top-3x
+    #signup
+    .container
+      .row
+        .col-lg-8.col-lg-offset-2.col-sm-12
+            div(data-mc-success-hide)
+              .text-center
+                h2 Pre-order Available Soon
+                p Sign-up for insider access &amp; up to 30% off.
+              include ../mailchimp/form.pug
+            .form-success.text-center(data-mc-success-show)
+              h2 Success!
+              p
+                | Please share with friends, then check your inbox to confirm your email.
+              .sharebar
+                include ../addthis/script.pug
+                .addthis_inline_share_toolbox
+
+  include ../footers/basic.pug
