@@ -1,0 +1,42 @@
+block vars
+  - var title = title || htmlWebpackPlugin.options.config.site.main.title
+  - var description = description || htmlWebpackPlugin.options.config.site.main.description
+  - var htmlAttrs = htmlAttrs || {}
+  - var bodyAttrs = bodyAttrs || {}
+doctype
+html(lang='en')&attributes(htmlAttrs)
+  head
+    if htmlWebpackPlugin.options.config.analytics.google.trackErrors
+      script.
+        addEventListener('error', window.__e=function f(e){f.q=f.q||[];f.q.push(e)});
+
+    block experiments
+    meta(charset='utf-8')
+    meta(http-equiv='x-ua-compatible', content='ie=edge')
+    meta(name='description', content=description)
+    meta(name='viewport', content='width=device-width, initial-scale=1, shrink-to-fit=no')
+    title= title
+    include ../meta/social
+    block head
+    block scripts
+    if htmlWebpackPlugin.options.config.site.ie8
+      include ../fixes/ieshiv.html
+
+  body&attributes(bodyAttrs)
+    block body
+    block footer
+
+    block footerjs
+      if htmlWebpackPlugin.options.config.env !== 'development'
+        each ext in htmlWebpackPlugin.options.config.externals
+          script(src=ext.src)&attributes(ext.attributes)
+
+    block analytics
+      if htmlWebpackPlugin.options.config.analytics.google
+        include ../google/analytics
+      if htmlWebpackPlugin.options.config.analytics.facebook
+        include ../facebook/pixel
+      if htmlWebpackPlugin.options.config.analytics.twitter
+        include ../twitter/pixel
+      if htmlWebpackPlugin.options.config.analytics.pinterest
+        include ../pinterest/pixel

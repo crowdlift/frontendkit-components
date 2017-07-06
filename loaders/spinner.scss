@@ -1,0 +1,13 @@
+/*======= Spinner ======= */
+.has-spinner {
+  position: relative;
+}
+.spinner {
+  display: none;
+  position: absolute;
+  margin: -8px auto 0;
+  left: 0;
+  right: 0;
+  top: 13px;
+  @include spinner(#bbb, #fff, 5px, 25px);
+}

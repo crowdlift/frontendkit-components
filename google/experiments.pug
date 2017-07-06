@@ -1,0 +1,8 @@
+script.
+  window.cxExperimenets = {};
+
+each val, key in htmlWebpackPlugin.options.config.experiments
+  if val.geid
+    script(src='//www.google-analytics.com/cx/api.js?experiment='+val.geid)
+    script.
+      window.cxExperimenets['#{key}'] = cxApi.chooseVariation('#{val.geid}');

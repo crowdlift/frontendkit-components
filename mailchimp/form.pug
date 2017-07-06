@@ -1,0 +1,55 @@
+//- TODO: add random string to input IDs so aria works properly without breaking multiple forms on the page
+
+form.signup.mc-signup.validate(
+    data-mc-signup-form,
+    role='form',
+    action=htmlWebpackPlugin.options.config.site.mailchimp.subscribe.url,
+    method='post',
+    name='subscribe-form',
+    target=htmlWebpackPlugin.options.config.site.mailchimp.subscribe.target,
+    novalidate=''
+  )
+
+  .row.form-fields.fb-login-container(data-mc-success-hide)
+    .col-xs-12.col-md-12
+      button.btn.btn-primary.fb-login(type='button')
+        svg.icon.icon-facebook2
+          use(xlink:href='#icon-facebook2')
+        span Sign Up One Click
+      strong OR
+
+  .row.form-fields(data-mc-success-hide)
+    .col-xs-12.col-md-5
+      .form-group
+        label.control-label(for='mce-FNAME') First Name
+        input.form-control.input-box#mce-FNAME(type='text', value='', data-signup-field='first_name', placeholder='Your first name', required='required', name='FNAME')
+        .help-block
+    .col-xs-12.hidden
+      .form-group
+        label.control-label(for='mce-LNAME') Last Name
+        input.form-control.input-box#mce-LNAME(type='text', value='', data-signup-field='last_name', placeholder='Your last name', name='LNAME', aria-hidden='true')
+        .help-block
+    .col-xs-12.col-md-7
+      .form-group
+        label.control-label(for='mce-EMAIL') Email Address
+        input.form-control.input-box#mce-EMAIL(type='email', value='', data-signup-field='email', placeholder='Your email', required='required', name='EMAIL')
+        .help-block
+    .col-xs-12.col-md-12
+      input(type='hidden', name=htmlWebpackPlugin.options.config.site.mailchimp.subscribe.id, value='')
+      .form-group.submit
+        .has-error(data-error-msg)
+          .help-block
+            //- MailChimp errors appear here
+        button.form-control.btn.btn-primary.has-spinner(type='submit')
+          .spinner
+          span Request Launch Invite
+
+  //- .row.form-success(data-mc-success-show)
+    .col-md-12
+      h2 Success!
+      p
+        | Please check your inbox to confirm your email... otherwise you'll miss out on important updates.
+      p
+        | Email:
+        =' '
+        strong(data-mc-email)

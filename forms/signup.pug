@@ -1,0 +1,29 @@
+form.invite-signup(role='form')
+  .fb-login-container
+    button.btn.btn-primary.fb-login(type='button')
+      svg.icon.icon-facebook2
+        use(xlink:href='#icon-facebook2')
+      span Sign Up One Click
+    span OR
+  .row.text-left
+    .col-xs-12.col-sm-6.col-md-4
+      .form-group
+        label.control-label First Name
+        input.form-control.input-box(type='text', placeholder='Your first name', required='required', name='first_name')
+        .help-block.with-errors
+    .col-xs-12.hidden
+      .form-group
+        label.control-label Last Name
+        input.form-control.input-box.hidden(type='text', placeholder='Your last name', name='last_name', aria-hidden='true')
+        .help-block.with-errors
+    .col-xs-12.col-sm-6.col-md-5
+      .form-group
+        label.control-label Email
+        input.form-control.input-box(type='email', placeholder='Your email', required='required', name='email')
+        .help-block.with-errors
+    .col-xs-12.col-md-3
+      .form-group
+        label &nbsp;
+        button.form-control.btn.btn-primary.has-spinner(type='submit')
+          .spinner
+          span Join Now

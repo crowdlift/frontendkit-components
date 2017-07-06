@@ -1,0 +1,140 @@
+$bg-md: 1024px !default;
+$bg-sm: 736px !default;
+
+
+@mixin arrow($rotation: 45deg) {
+  position: relative;
+  top: 3pt;
+  display: inline-block;
+  width: 0.4em;
+  height: 0.4em;
+  border-right: 0.2em solid black;
+  border-top: 0.2em solid black;
+  transform: rotate($rotation);
+  margin-right: 0.5em;
+}
+
+@mixin bg-image-fixed($color, $imgsrc, $imgsrc-md: null, $imgsrc-sm: null) {
+  overflow: hidden;
+  position: relative;
+  background: transparent;
+  &::before {
+    content: ' ';
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background: $color url($imgsrc) no-repeat center center;
+    background-size: cover;
+    // creates a new paint layer
+    will-change: transform;
+    z-index: -1;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    @media handheld, only screen and (max-width: 1024px) {
+      background-attachment: scroll !important;
+      position: absolute !important;
+    }
+    @if $imgsrc-md {
+      @media screen and (max-width: $bg-md) {
+        background-image: url($imgsrc-md);
+      }
+    }
+    @if $imgsrc-sm {
+      @media screen and (max-width: $bg-sm) {
+        background-image: url($imgsrc-sm);
+      }
+    }
+  }
+}
+
+@mixin bg-overlay($color) {
+  background: $color;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  top: 0px;
+}
+
+@mixin clearfix() {
+  &:before,
+  &:after {
+    content: ' ';
+    display: table;
+  }
+  &:after {
+    clear: both;
+  }
+}
+
+
+@mixin spinner(
+    $color: rgba(56, 83, 233, 0.2),
+    $highlight: #3853e9,
+    $thickness: 5px,
+    $size: 2em) {
+  border: $thickness solid $color; /* Light grey */
+  border-top: $thickness solid $highlight; /* Blue */
+  border-radius: 50%;
+  width: $size;
+  height: $size;
+  animation: spin 1s linear infinite;
+
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+}
+
+@mixin spinner2(
+    $color: rgba(56, 83, 233, 0.2),
+    $highlight: #3853e9,
+    $thickness: 5px) {
+  margin: 0 auto;
+  font-size: 10px;
+  position: relative;
+  text-indent: -9999em;
+  border-top: $thickness solid $color;
+  border-right: $thickness solid $color;
+  border-bottom: $thickness solid $color;
+  border-left: $thickness solid $highlight;
+  transform: translateZ(0);
+  transform-style: preserve-3d;
+  transform-origin: center center;
+  animation: load8 1.1s infinite linear;
+  &, &:after {
+    border-radius: 20%;
+    width: 40px;
+    height: 40px;
+  }
+  @keyframes load8 {
+    0% {
+      transform: rotate3d(0,0,0,0deg);
+    }
+    100% {
+      transform: rotate3d(0,0,1,360deg);
+    }
+  }
+}
+
+@mixin rotating-plane(
+    $spinkit-spinner-margin: 40px auto,
+    $spinkit-size: 40px,
+    $spinkit-spinner-color: #333){
+  width: $spinkit-size;
+  height: $spinkit-size;
+  background-color: $spinkit-spinner-color;
+  margin: $spinkit-spinner-margin;
+  animation: sk-rotatePlane 1.2s infinite ease-in-out;
+
+  @keyframes sk-rotatePlane {
+    0% {
+      transform: perspective(120px) rotateX(0deg) rotateY(0deg);
+    } 50% {
+      transform: perspective(120px) rotateX(-180.1deg) rotateY(0deg);
+    } 100% {
+      transform: perspective(120px) rotateX(-180deg) rotateY(-179.9deg);
+    }
+  }
+}

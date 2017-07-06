@@ -1,0 +1,71 @@
+include ../facebook/pixel
+include ../google/analytics_inline
+if htmlWebpackPlugin.options.config.analytics.twitter
+  include ../pinterest/pixel
+if htmlWebpackPlugin.options.config.analytics.pinterest
+  include ../twitter/pixel
+
+style.
+  h2 { margin: 20px; text-align: center; }
+  a { text-decoration: underline; }
+
+script.
+  var url = "#{htmlWebpackPlugin.options.config.site.redirect.url}";
+  var search = window.location.search;
+  var ref = window;
+
+  //- Strip ref param from UTM if present in redirect URL
+  //- if (url.match(/[&\?]ref=/)) {
+  //-   search = search.replace(/((\?)?|&)ref=[^&]*/g, '$2');
+  //- }
+  if (!url.match(/\?/)) {
+    url += '?';
+  }
+  url += '&' + search.replace(/\?/, '');
+
+  var redirect = function(u) { ref.location = u; };
+  if (window.self !== window.top && window.parent) {
+    ref = window.parent;
+  } else if (window.location.replace) {
+    redirect = window.location.replace;
+  }
+  setTimeout(function(){
+    try {
+      redirect(url);
+    } catch(e) {
+      window.location = url;
+    }
+  }, 100);
+noscript
+  meta(HTTP-EQUIV='REFRESH', content='0; url='+htmlWebpackPlugin.options.config.site.redirect.url)
+  h2
+    | Go to
+    = ' '
+    a(href=htmlWebpackPlugin.options.config.site.redirect.url, target='_top')
+      = htmlWebpackPlugin.options.config.site.main.title
+      = ' '
+      | on
+      = ' '
+      = htmlWebpackPlugin.options.config.site.redirect.siteName
+
+
+h2#link(style='display: none;')
+  | Go to
+  = ' '
+  a(href=htmlWebpackPlugin.options.config.site.redirect.url, target='_top')
+    = htmlWebpackPlugin.options.config.site.main.title
+    = ' '
+    | on
+    = ' '
+    = htmlWebpackPlugin.options.config.site.redirect.siteName
+
+script.
+  var link = document.getElementById('link');
+  setTimeout(function(){
+    link.style.display = 'block';
+  }, 1000);
+
+
+//- each jsFile in htmlWebpackPlugin.files.js
+//-   script.
+//-     !{compilation.assets[jsFile.substr(htmlWebpackPlugin.files.publicPath.length)].source()}
