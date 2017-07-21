@@ -82,12 +82,12 @@ const showError = (options, resp) => {
   }
 };
 
-const successCallback = (options, resp) => {
+const onSuccess = (options, resp) => {
   hideSpinner(options);
   if (resp.result === 'success') {
     showSuccess(options);
-    if (options.settings.callback) {
-      options.settings.callback(options, resp);
+    if (options.settings.success) {
+      options.settings.success(options, resp);
     }
   } else {
     showError(options, resp);
@@ -115,7 +115,7 @@ const ajaxSubmit = (options) => {
   $.ajax({
     url: options.settings.url,
     data: options.form.serializeArray(),
-    success: successCallback.bind(successCallback, options),
+    success: onSuccess.bind(onSuccess, options),
     dataType: 'jsonp',
     error: (resp, text) => {
       // eslint-disable-next-line no-console
@@ -128,27 +128,26 @@ const ajaxSubmit = (options) => {
 const submit = (options, evt) =>
   (validate(evt, options) ? ajaxSubmit(options) : false);
 
-$.fn.ajaxChimp = function ajaxChimp(options = {}) {
-  const setup = (elem) => {
-    const form = (elem.tagName === 'FORM') ? $(elem) : $(elem).find('form');
-    const email = form.find('input[type=email]');
-    const opts = {
-      form,
-      email,
-      settings: {
-        url: form.attr('action').replace('/post?', '/post-json?').concat('&c=?'),
-        language: 'en',
-        ...options,
-      },
-    };
-    form.attr('novalidate', 'true');
-    email.attr('name', 'EMAIL');
-    form.submit(submit.bind(submit, opts));
+const setup = (elem, options) => {
+  const form = (elem.tagName === 'FORM') ? $(elem) : $(elem).find('form');
+  const email = form.find('input[type=email]');
+  const opts = {
+    form,
+    email,
+    settings: {
+      url: form.attr('action').replace('/post?', '/post-json?').concat('&c=?'),
+      language: 'en',
+      ...options,
+    },
   };
+  form.attr('novalidate', 'true');
+  email.attr('name', 'EMAIL');
+  form.submit(submit.bind(submit, opts));
+};
 
-  this.toArray().forEach(elem =>
-    ((elem.tagName === 'FORM') ? setup(elem) : false),
-  );
-
+$.fn.ajaxChimp = function ajaxChimp(options = {}) {
+  this.filter('form').toArray().forEach(elem => setup(elem, options));
   return this;
 };
+
+export default setup;
