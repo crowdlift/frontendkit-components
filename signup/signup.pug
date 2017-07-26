@@ -1,0 +1,54 @@
+//- TODO: add random string to input IDs so aria works properly without breaking multiple forms on the page
+
+form.signup.validate(
+    data-signup-signup-form,
+    role='form',
+    action=htmlWebpackPlugin.options.config.site.emaillist.form.action,
+    method='post',
+    name='subscribe-form',
+    target=htmlWebpackPlugin.options.config.site.emaillist.form.target,
+    novalidate=''
+  )
+
+  .row.form-fields.fb-login-container(data-signup-success-hide)
+    .col-xs-12.col-md-12
+      button.btn.btn-primary.fb-login(type='button')
+        svg.icon.icon-facebook2
+          use(xlink:href='#icon-facebook2')
+        span Sign Up One Click
+      strong OR
+
+  .row.form-fields(data-signup-success-hide)
+    .col-xs-12.col-md-5
+      .form-group
+        label.control-label(for='signup-fname') First Name
+        input.form-control.input-box#signup-fname(type='text', value='', data-signup-field='first_name', placeholder='Your first name', required='required', name='FNAME')
+        .help-block
+    .col-xs-12.hidden
+      .form-group
+        label.control-label(for='signup-lname') Last Name
+        input.form-control.input-box#signup-lname(type='text', value='', data-signup-field='last_name', placeholder='Your last name', name='LNAME', aria-hidden='true')
+        .help-block
+    .col-xs-12.col-md-7
+      .form-group
+        label.control-label(for='signup-email') Email Address
+        input.form-control.input-box#signup-email(type='email', value='', data-signup-field='email', placeholder='Your email', required='required', name='email')
+        .help-block
+    .col-xs-12.col-md-12
+      .form-group.submit
+        .has-error(data-error-msg)
+          .help-block
+            //- MailChimp errors appear here
+        button.form-control.btn.btn-primary.has-spinner(type='submit')
+          .spinner
+          span Request Launch Invite
+
+  //- .row.form-success(data-signup-success-show)
+    .col-md-12
+      h2 Success!
+      p
+        | Check your email for an invite:
+        =' '
+        strong(data-signup-email)
+      p Please share.
+      .addthis_inline_share_toolbox
