@@ -4,5 +4,8 @@
   "main": "index.js",
   "repository": "git@github.com:crowdlift/frontendkit-components.git",
   "author": "Joe Johnston <joe@simple10.com>",
-  "license": "UNLICENSED"
+  "license": "UNLICENSED",
+  "devDependencies": {
+    "owl.carousel": "github:OwlCarousel2/OwlCarousel2#2.2.1"
+  }
 }
