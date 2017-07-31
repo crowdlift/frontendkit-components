@@ -5,16 +5,16 @@ footer.fw-section.section.bg-dark.footer
       .col-md-3.col-md-offset-1.col-sm-4
         h5 Social
         ul.list-unstyled
-          if htmlWebpackPlugin.options.config.social.facebook.pageURL
+          if htmlWebpackPlugin.options.config.social.facebook && htmlWebpackPlugin.options.config.social.facebook.pageURL
             li
               a(href=htmlWebpackPlugin.options.config.social.facebook.pageURL) Facebook
-          if htmlWebpackPlugin.options.config.social.twitter.pageURL
+          if htmlWebpackPlugin.options.config.social.twitter && htmlWebpackPlugin.options.config.social.twitter.pageURL
             li
               a(href=htmlWebpackPlugin.options.config.social.twitter.pageURL) Twitter
-          if htmlWebpackPlugin.options.config.social.instagram.pageURL
+          if htmlWebpackPlugin.options.config.social.instagram && htmlWebpackPlugin.options.config.social.instagram.pageURL
             li
               a(href=htmlWebpackPlugin.options.config.social.instagram.pageURL) Instagram
-          if htmlWebpackPlugin.options.config.social.pinterest.pageURL
+          if htmlWebpackPlugin.options.config.social.pinteres && htmlWebpackPlugin.options.config.social.pinterest.pageURL
             li
               a(href=htmlWebpackPlugin.options.config.social.pinterest.pageURL) Pinterest
       .col-md-3.col-sm-4
