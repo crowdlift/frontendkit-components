@@ -5,22 +5,27 @@ footer.fw-section.section.bg-dark.footer
       .col-md-3.col-md-offset-1.col-sm-4
         h5 Social
         ul.list-unstyled
-          li
-            a(href=htmlWebpackPlugin.options.config.social.facebook.pageURL) Facebook
-          li
-            a(href=htmlWebpackPlugin.options.config.social.twitter.pageURL) Twitter
-          //- li
-          //-   a(href=htmlWebpackPlugin.options.config.social.instagram.pageURL) Instagram
+          if htmlWebpackPlugin.options.config.social.facebook.pageURL
+            li
+              a(href=htmlWebpackPlugin.options.config.social.facebook.pageURL) Facebook
+          if htmlWebpackPlugin.options.config.social.twitter.pageURL
+            li
+              a(href=htmlWebpackPlugin.options.config.social.twitter.pageURL) Twitter
+          if htmlWebpackPlugin.options.config.social.instagram.pageURL
+            li
+              a(href=htmlWebpackPlugin.options.config.social.instagram.pageURL) Instagram
+          if htmlWebpackPlugin.options.config.social.pinterest.pageURL
+            li
+              a(href=htmlWebpackPlugin.options.config.social.pinterest.pageURL) Pinterest
       .col-md-3.col-sm-4
         h5 Support
         ul.list-unstyled
-          //- li
-          //-   a(href=htmlWebpackPlugin.options.config.site.main.url)
-          //-    | #{ htmlWebpackPlugin.options.config.site.main.title } Website
-          li
-            a(href=htmlWebpackPlugin.options.config.site.legal.privacy) Privacy &amp; Terms
-          //- li
-            a(href=htmlWebpackPlugin.options.config.site.legal.tos) Terms &amp; Conditions
+          if htmlWebpackPlugin.options.config.site.legal.privacy
+            li
+              a(href=htmlWebpackPlugin.options.config.site.legal.privacy) Privacy &amp; Terms
+          if htmlWebpackPlugin.options.config.site.legal.tos
+            li
+              a(href=htmlWebpackPlugin.options.config.site.legal.tos) Terms &amp; Conditions
       .col-md-3.col-sm-4
         h5 Contact
         address
