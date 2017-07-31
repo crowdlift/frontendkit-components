@@ -1,7 +1,6 @@
 @import '~owl.carousel/src/scss/core';
-@import '~owl.carousel/src/scssanimate';
-@import '~owl.carousel/src/scssautoheight';
-@import '~owl.carousel/src/scsslazyload';
-@import '~owl.carousel/src/scssvideo';
+@import '~owl.carousel/src/scss/animate';
+@import '~owl.carousel/src/scss/autoheight';
+@import '~owl.carousel/src/scss/lazyload';
 // Disable video since it references an image file that causes build errors
 // @import '~owl.carousel/src/scss/video';
