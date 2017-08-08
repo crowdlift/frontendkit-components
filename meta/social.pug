@@ -1,39 +1,43 @@
 //- See: https://moz.com/blog/meta-data-templates-123
 
-<!-- Twitter Card data -->
+//- TWITTER
 //- https://dev.twitter.com/cards/types/summary-large-image
 //- Validator: https://cards-dev.twitter.com/validator
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:site" content="@#{ htmlWebpackPlugin.options.config.social.twitter.handle }">
-<meta name="twitter:title" content="#{ htmlWebpackPlugin.options.config.social.twitter.title }">
-<meta name="twitter:description" content="#{ htmlWebpackPlugin.options.config.social.twitter.description }">
-<meta name="twitter:creator" content="@#{ htmlWebpackPlugin.options.config.social.twitter.handle }">
 //- Image size: at least 280x150px
-<meta name="twitter:image:src" content="#{ htmlWebpackPlugin.options.config.social.twitter.image }">
+if htmlWebpackPlugin.options.config.social.twitter
+  <!-- Twitter Card data -->
+  meta(name='twitter:card', content='summary_large_image')
+  meta(name='twitter:site', content='@#{ htmlWebpackPlugin.options.config.social.twitter.handle }')
+  meta(name='twitter:title', content='#{ htmlWebpackPlugin.options.config.social.twitter.title }')
+  meta(name='twitter:description', content='#{ htmlWebpackPlugin.options.config.social.twitter.description }')
+  meta(name='twitter:creator', content='@#{ htmlWebpackPlugin.options.config.social.twitter.handle }')
+  meta(name='twitter:image:src', content='#{ htmlWebpackPlugin.options.config.social.twitter.image }')
 
-<!-- Open Graph data -->
+//- FACEBOOK
 //- https://developers.facebook.com/docs/sharing/opengraph
 //- Validator: https://developers.facebook.com/tools/debug/
-<meta property="og:title" content="#{ htmlWebpackPlugin.options.config.social.facebook.title }">
-<meta property="og:type" content="article">
-if htmlWebpackPlugin.options.config.social.facebook.siteURL
-  <meta property="og:url" content="#{ htmlWebpackPlugin.options.config.social.facebook.siteURL }">
 //- Image size: 1200x630
-<meta property="og:image" content="#{ htmlWebpackPlugin.options.config.social.facebook.image }">
-if htmlWebpackPlugin.options.config.social.facebook.imageWidth
-  <meta property="og:image:width" content="#{ htmlWebpackPlugin.options.config.social.facebook.imageWidth }">
-if htmlWebpackPlugin.options.config.social.facebook.imageHeight
-  <meta property="og:image:width" content="#{ htmlWebpackPlugin.options.config.social.facebook.imageHeight }">
-<meta property="og:description" content="#{ htmlWebpackPlugin.options.config.social.facebook.description }">
-<meta property="og:site_name" content="#{ htmlWebpackPlugin.options.config.social.facebook.siteName }">
-//- <meta property="article:published_time" content="2013-09-17T05:59:00+01:00">
-//- <meta property="article:modified_time" content="2013-09-16T19:08:47+01:00">
-//- <meta property="article:section" content="Technology">
-//- <meta property="article:tag" content="keyword">
-if htmlWebpackPlugin.options.config.social.facebook.adminIDs
-  <meta property="fb:admins" content="#{ htmlWebpackPlugin.options.config.social.facebook.adminIDs }">
-if htmlWebpackPlugin.options.config.social.facebook.appID
-  <meta property="fb:app_id" content="#{ htmlWebpackPlugin.options.config.social.facebook.appID }">
+if htmlWebpackPlugin.options.config.social.facebook
+  <!-- Open Graph data -->
+  meta(property='og:title', content='#{ htmlWebpackPlugin.options.config.social.facebook.title }')
+  meta(property='og:type', content='article')
+  if htmlWebpackPlugin.options.config.social.facebook.siteURL
+    meta(property='og:url', content='#{ htmlWebpackPlugin.options.config.social.facebook.siteURL }')
+  meta(property='og:image', content='#{ htmlWebpackPlugin.options.config.social.facebook.image }')
+  if htmlWebpackPlugin.options.config.social.facebook.imageWidth
+    meta(property='og:image:width', content='#{ htmlWebpackPlugin.options.config.social.facebook.imageWidth }')
+  if htmlWebpackPlugin.options.config.social.facebook.imageHeight
+    meta(property='og:image:height', content='#{ htmlWebpackPlugin.options.config.social.facebook.imageHeight }')
+  meta(property='og:description', content='#{ htmlWebpackPlugin.options.config.social.facebook.description }')
+  meta(property='og:site_name', content='#{ htmlWebpackPlugin.options.config.social.facebook.siteName }')
+  if htmlWebpackPlugin.options.config.social.facebook.adminIDs
+    meta(property='fb:admins', content='#{ htmlWebpackPlugin.options.config.social.facebook.adminIDs }')
+  if htmlWebpackPlugin.options.config.social.facebook.appID
+    meta(property='fb:app_id', content='#{ htmlWebpackPlugin.options.config.social.facebook.appID }')
+  //- meta(property='article:published_time', content='2013-09-17T05:59:00+01:00')
+  //- meta(property='article:modified_time', content='2013-09-16T19:08:47+01:00')
+  //- meta(property='article:section', content='Technology')
+  //- meta(property='article:tag', content='keyword')
 
 //- Google+
 //- https://developers.google.com/+/web/snippet/
