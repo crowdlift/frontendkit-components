@@ -21,7 +21,8 @@ if htmlWebpackPlugin.options.config.social.addthis.shareURL
     addthis_share.url = '#{htmlWebpackPlugin.options.config.social.addthis.shareURL}';
 
 script(
-  type="text/javascript",
+  id='addthis-script',
+  type='text/javascript',
   src=`//s7.addthis.com/js/300/addthis_widget.js#pubid=${htmlWebpackPlugin.options.config.social.addthis.pubid}`,
   async
 )
