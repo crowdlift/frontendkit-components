@@ -1,17 +1,34 @@
 import loadScript from '../utils/loadscript';
 
-const SCRIPT_BASE = '//s7.addthis.com/js/300/addthis_widget.js#pubid=';
-
-const load = (pubid, callback) => {
-  return loadScript(`${SCRIPT_BASE}${pubid}`, callback);
+const load = (url, callback) => {
+  return loadScript(url, callback);
 };
 
 // Load script and wait for DOM
-const wait = (pubid, callback) => {
-  return load(pubid, () => $(document).ready(callback));
+const wait = (url, callback) => {
+  return load(url, () => $(document).ready(callback));
+};
+
+const init = (config = process.env.social) => {
+  const addthis_share = window.addthis_share || {};
+  if (config.twitter.handle) {
+    addthis_share.passthrough = {
+      twitter: {
+        via: config.twitter.handle,
+        text: config.twitter.title || undefined,
+      },
+    };
+  }
+  // Use global share URL if present
+  // This is useful when A/B testing landing page URLs but wanting to share a different URL
+  if (config.addthis.shareURL) {
+    addthis_share.url = config.addthis.shareURL;
+  }
+  window.addthis_share = addthis_share;
 };
 
 export {
+  init,
   load,
   wait,
 };
