@@ -1,3 +1,25 @@
+//- To register callbacks:
+//- http://www.addthis.com/academy/addthis-javascript-events/
+//- addthis.addEventListener(type, listener);
+//- addthis.addEventListener('addthis.menu.share', shareEventHandler);
+
+if htmlWebpackPlugin.options.config.social.twitter && htmlWebpackPlugin.options.config.social.twitter.handle
+  - const tweet = htmlWebpackPlugin.options.config.social.twitter.title
+  script.
+    var addthis_share = addthis_share || {};
+    addthis_share.passthrough = {
+      twitter: {
+        via: '#{htmlWebpackPlugin.options.config.social.twitter.handle}'
+        !{tweet ? `, text: "${tweet}"` : ''}
+      }
+    };
+
+//- Use global share URL if present
+//- This is useful when A/B testing landing page URLs but wanting to share a different URL
+if htmlWebpackPlugin.options.config.social.addthis.shareURL
+  script.
+    addthis_share.url = '#{htmlWebpackPlugin.options.config.social.addthis.shareURL}';
+
 script(
   type="text/javascript",
   src=`//s7.addthis.com/js/300/addthis_widget.js#pubid=${htmlWebpackPlugin.options.config.social.addthis.pubid}`,
