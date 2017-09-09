@@ -2,7 +2,7 @@ let options = {
   // Facebook SDK
   scope: 'public_profile,email',
   fields: 'email,first_name,last_name',
-  version: 'v2.8',
+  version: 'v2.10',
 
   // Array of DOM elements or jQuery object
   loginButtons: [],
@@ -15,8 +15,38 @@ let options = {
   debug: false,
 };
 
+const state = {
+  initialized: false,
+  queues: {
+    'Event.subscribe': [],
+  },
+};
+
 const setOptions = opts =>
   (options = { ...options, ...opts });
+
+// Subscribe to Facebook SDK event
+// Queues until FB is available
+const subscribe = (event, callback) => {
+  if (state.initialized) {
+    window.FB.subscribe(event, callback);
+  } else {
+    state.queues['Event.subscribe'].push([event, callback]);
+  }
+};
+
+const processQueues = () => {
+  Object.keys(state.queues).forEach((key) => {
+    const queue = state.queues[key];
+    queue.forEach((args) => {
+      let ref = window.FB;
+      key.split('.').forEach((idx) => {
+        ref = ref[idx];
+      })
+      ref.apply(ref, args);
+    });
+  });
+};
 
 const runCallback = (cb, payload) => {
   if (typeof cb === 'function') {
@@ -61,6 +91,8 @@ const fbAsyncInit = () => {
     status: true,
     version: options.version,
   });
+  state.initialized = true;
+  processQueues();
   window.FB.getLoginStatus(onStatus);
 };
 
@@ -112,4 +144,5 @@ const init = (opts) => {
 export {
   init,
   setOptions,
+  subscribe,
 };
