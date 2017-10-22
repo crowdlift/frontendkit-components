@@ -6,7 +6,7 @@ block vars
 doctype
 html(lang='en')&attributes(htmlAttrs)
   head
-    if htmlWebpackPlugin.options.config.analytics.google.trackErrors
+    if htmlWebpackPlugin.options.config.analytics.google && htmlWebpackPlugin.options.config.analytics.google.trackErrors
       script.
         addEventListener('error', window.__e=function f(e){f.q=f.q||[];f.q.push(e)});
 
