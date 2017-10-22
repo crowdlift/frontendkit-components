@@ -32,6 +32,8 @@ html(lang='en')&attributes(htmlAttrs)
           script(src=ext.src)&attributes(ext.attributes)
 
     block analytics
+      if htmlWebpackPlugin.options.config.analytics.googletagmanager
+        include ../google/tag_manager
       if htmlWebpackPlugin.options.config.analytics.google
         include ../google/analytics
       if htmlWebpackPlugin.options.config.analytics.facebook
